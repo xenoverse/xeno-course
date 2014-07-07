@@ -6,7 +6,8 @@ name = require('./package.json').name
 
 paths =
   scripts: ['*.coffee', '!gulpfile.coffee']
-  styles: ['*.less']
+  styles: ['*.css']
+  less: ['*.less']
 
 gulp.task 'scripts', ->
   return gulp.src paths.scripts
@@ -15,6 +16,11 @@ gulp.task 'scripts', ->
 
 gulp.task 'styles', ->
   return gulp.src paths.styles
+    .pipe $.autoprefixer('last 1 version')
+    .pipe gulp.dest('.tmp/' + name)
+
+gulp.task 'less', ->
+  return gulp.src paths.less
     .pipe $.less()
     .pipe $.autoprefixer('last 1 version')
     .pipe gulp.dest('.tmp/' + name)
@@ -52,6 +58,7 @@ gulp.task 'watch', ['scripts', 'styles', 'connect', 'serve'], ->
 
   gulp.watch paths.scripts, ['scripts']
   gulp.watch paths.styles, ['styles']
+  gulp.watch paths.less, ['less']
 
 gulp.task 'symlink', ->
   gulp.src name + '.html'
