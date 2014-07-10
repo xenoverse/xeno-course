@@ -1,15 +1,19 @@
 Polymer 'xeno-course',
 
+  spaces: null
   course: null
 
   domReady: ->
     @course = []
-    for element, i in @.children
+    @spaces = []
+    for space, i in @.children
+      @spaces.push space
+
       location =
         x: i * 800
         y: 0
 
-      @transform element, "translateX(#{location.x}px)"
+      @transform space, "translateX(#{location.x}px)"
       @course.push location
 
   transform: (element, value) ->
