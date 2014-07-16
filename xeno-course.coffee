@@ -1,9 +1,20 @@
 Polymer 'xeno-course',
 
+  spaces: null
+  course: null
+
   domReady: ->
-    for element, i in @.children
-      # console.log element
-      @transform element, "translateX(#{i * 800}px)"
+    @course = []
+    @spaces = []
+    for space, i in @.querySelectorAll 'xeno-space'
+      @spaces.push space
+
+      location =
+        x: i * 800
+        y: 0
+
+      @transform space, "translateX(#{location.x}px)"
+      @course.push location
 
   transform: (element, value) ->
     element.style.transform = element.style.webkitTransform = value
