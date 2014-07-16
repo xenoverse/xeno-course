@@ -6,7 +6,7 @@ Polymer 'xeno-course',
   domReady: ->
     @course = []
     @spaces = []
-    for space, i in @.children
+    for space, i in @.querySelectorAll 'xeno-space'
       @spaces.push space
 
       location =
